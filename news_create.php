@@ -41,7 +41,8 @@
 						$text=$_POST["textadd"];
 						$file=$_FILES["imagefile"]["name"];  
 						$target=$target.$file;
-						$qry="insert into news(id,Heading,news,file,date,uploader) values ('','$heading','$text','$file','','$uploader')";
+						$severity=0;
+						$qry="insert into news(id,Heading,news,file,severity,date,uploader) values ('','$heading','$text','$file','$severity',CURRENT_TIMESTAMP,'$uploader')";
 						$re=$conn->query($qry) or die("query failed");
 						if(isset($_FILES["imagefile"]))	               
 							move_uploaded_file($_FILES["imagefile"]["tmp_name"],$target);

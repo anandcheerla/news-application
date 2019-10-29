@@ -76,7 +76,11 @@
 		
 		//Fetch the data from the data bases
         for($i=0;$i<$re->num_rows;$i++){
-            $row=$re->fetch_assoc();
+			$row=$re->fetch_assoc();
+			//$votes=(int)$row["severity"];
+			//$votes+=1;
+			//echo gettype($votes);
+
             echo "<br>";
             echo "<div id='imgandnews'>";
 					echo "<img id='img1' src='uploads/".$row["file"]."' width=200 height=200>";
@@ -86,7 +90,9 @@
 						echo "".$row["news"];
 						echo "<br><br>";
 						echo " Uploader:".$row["uploader"];
+
 					echo "</span>";
+										
             echo "</div>";
             echo "<br>";
         }
