@@ -54,7 +54,7 @@
 						header("location:homelogin.php");
 					}
 					else{
-						echo "wrong credentials";
+						echo "<h3 align='center'>wrong credentials</h3>";
 					}
 				}
 			

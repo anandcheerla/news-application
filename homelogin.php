@@ -72,7 +72,7 @@
     <?php
         session_start();
         if(count($_SESSION)==0)
-        	echo "please Login";
+        	header("location:login.php");
         else{
 
 			echo "<h3 align='right'>Login as :".$_SESSION['username']."</h3>";
