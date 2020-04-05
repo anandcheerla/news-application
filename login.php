@@ -23,7 +23,8 @@
              <h1>N<span id="e">E</span>WS</h1>
         </div>
 		<?php
-		
+			
+
 			session_start();
 			if(isset($_SESSION["username"]))
 					header("location:homelogin.php");
@@ -31,23 +32,30 @@
 			include "connect.php";
 			if(isset($_POST["loginsubmit"]))
 			{
-				$username=$_POST["username"];
-				$password=$_POST["password"];
+				$username=$conn->real_escape_string($_POST["username"]);
+				$password=$conn->real_escape_string($_POST["password"]);
 				
 				if($username=="akc" and $password=="akc")
 				{
 					$_SESSION["username"]=$username;
 					header("location:news_create.php");
 				}
+
+				$passHash = password_hash($password, PASSWORD_DEFAULT);
 				
-				$qry="select * from users where username='$username' and password='$password'";
-				
+				$qry="select password from users where username='$username'";
 				$result=$conn->query($qry) or die("query failed");
-				
+
 				if($result->num_rows>0)
 				{
-					$_SESSION["username"]=$username;
-					header("location:homelogin.php");
+					$pass=$result->fetch_assoc();
+					if(password_verify($password,$pass["password"])){
+						$_SESSION["username"]=$username;
+						header("location:homelogin.php");
+					}
+					else{
+						echo "wrong credentials";
+					}
 				}
 			
 			}

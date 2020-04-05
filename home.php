@@ -1,14 +1,9 @@
 <html>
-
 	<head>
-
 		<style>
 			.indiv{
-
-				
 				margin-left:100px;
 				margin-right:100px;
-			
 			}
 			.headdiv{
 				padding:30px;
@@ -19,24 +14,18 @@
 				position:fixed;
 				margin-left:45%;
 				font-size:20;
-				
 			}
 			#recent{
 				border-style:ridge;
 				padding:30;
 				
 			}
-			#e{
-				
+			#e{		
 				color:red;
 				font-size:40;
-				
 			}
-			
 		</style>
-
 	</head>
-
 <body>
     <?php
         session_start();

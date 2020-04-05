@@ -19,16 +19,17 @@
    <body>
 		<?php
 			include "connect.php";
+			
 
 			if(isset($_POST["regsubmit"]))
 			{
-				$firstname=$_POST["firstname"];
-				$lastname=$_POST["lastname"];
-				$username=$_POST["username"];
-				$password=$_POST["password"];
-				$confirmpassword=$_POST["confirmpassword"];
-				$email=$_POST["email"];
-				$mobile=$_POST["mobilenumber"];
+				$firstname=$conn->real_escape_string($_POST["firstname"]);
+				$lastname=$conn->real_escape_string($_POST["lastname"]);
+				$username=$conn->real_escape_string($_POST["username"]);
+				$password=$conn->real_escape_string($_POST["password"]);
+				$confirmpassword=$conn->real_escape_string($_POST["confirmpassword"]);
+				$email=$conn->real_escape_string($_POST["email"]);
+				$mobile=$conn->real_escape_string($_POST["mobilenumber"]);
 				
 				if ($password != $confirmpassword)
 					echo "<h2>passwords not matched</h2>";
@@ -36,12 +37,19 @@
 					echo "<h2>Password should be atleast 8 characters</h2>";
 				else
 				{
-					
-					$qry="insert into users(firstname,lastname,username,password,email,mobilenumber) values ('$firstname','$lastname','$username','$password','$email','$mobile')";
-
+					$qry="select username from users where username='$username'";
 					$result=$conn->query($qry) or die("query failed".$conn->error);
+					if($result->num_rows > 0)
+						echo "username is already taken,please choose another one";
+					else{
+						$passHash = password_hash($password, PASSWORD_DEFAULT);
 
-					header("location:login.php");
+						$qry="insert into users(firstname,lastname,username,password,email,mobilenumber) values ('$firstname','$lastname','$username','$passHash','$email','$mobile')";
+
+						$result=$conn->query($qry) or die("query failed".$conn->error);
+
+						header("location:login.php");
+					}
 				}
 			}
 			
