@@ -26,6 +26,8 @@
 			position: relative;
 			margin-right:40%;
 			
+
+			
 		}
 		#imgandnews img{
 			
@@ -50,6 +52,10 @@
 				font-size:40;
 				
 			}
+
+		#CandV_div{
+			
+		}
 		</style>
 
 	</head>
@@ -71,7 +77,7 @@
 			echo "<h3><a href='logout.php'>Logout</a></h3>";
 		echo "</div>";
         include "connect.php";
-        $qry="select * from news";
+        $qry="select * from news where date>=DATE_SUB(CURRENT_DATE(), INTERVAL 1 DAY)";
         $re=$conn->query($qry) or die("Query failed");
 		
 		//Fetch the data from the data bases
@@ -83,7 +89,7 @@
 
             echo "<br>";
             echo "<div id='imgandnews'>";
-					echo "<img id='img1' src='uploads/".$row["file"]."' width=200 height=200>";
+					echo "<img id='".$row["id"]."' src='uploads/".$row["file"]."' width=200 height=200>";
 					echo "<span>";
 						echo "<p style='color:blue;'}>".$row['Heading']."</p>";
 						echo "<br>";
@@ -94,7 +100,12 @@
 					echo "</span>";
 										
             echo "</div>";
+            
+            echo "<div id='CandV_div'>
+            	  </div>";
+
             echo "<br>";
+            
         }
     ?>
    </div>

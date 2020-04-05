@@ -1,13 +1,15 @@
 <?php
         session_start();
         include "connect.php";
-         if(isset($_POST["sub"]))
+         if(isset($_POST["commentSubmitButton"]))
 		 {
            $text=$_POST["comment"];
             echo "<br>";
-            $temp=$_SESSION["username"];   
+            $user=$_SESSION["username"]; 
+            $commentFor= $POST["commentFrom"]
+
 			
-            $qry="insert into comments(id,username,comments) values ('','$temp','$text')";   
+            $qry="insert into comments(id,username,comments) values ('','$temp','$text','$commentFor',CURRENT_TIMESTAMP)";   
             $result=$conn->query($qry) or die("query failed".$conn->error);    
             header("location:homelogin.php");
         }

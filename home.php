@@ -62,7 +62,7 @@
 		<?php
 
 			include "connect.php";
-			$qry="select * from news";
+			$qry="select * from news where date>=DATE_SUB(CURRENT_DATE(), INTERVAL 1 DAY)";
 			$re=$conn->query($qry) or die("Query failed");
 			for($i=0;$i<$re->num_rows;$i++){
 				$row=$re->fetch_assoc();
