@@ -1,1 +1,1 @@
-# lab_internal
+# News sharing Web Application using PHP
